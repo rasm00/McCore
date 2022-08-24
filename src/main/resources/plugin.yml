@@ -1,0 +1,8 @@
+name: McCore
+version: '${project.version}'
+main: net.justcoded.mc_core.Core
+api-version: 1.18
+load: STARTUP
+authors: [ ThisKarolGajda, rasm00 ]
+description: This core include most helplful tools for building your plugin faster.
+website: net.justcoded
