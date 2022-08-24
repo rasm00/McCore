@@ -2,6 +2,7 @@ package net.justcoded.mc_core.components.tasks;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitTask;
 
 public class AsyncRepeatingTask<T extends JavaPlugin> extends AsyncDelayedTask<T>{
 
@@ -13,8 +14,8 @@ public class AsyncRepeatingTask<T extends JavaPlugin> extends AsyncDelayedTask<T
     }
 
     @Override
-    public int task() {
+    public BukkitTask task() {
         return Bukkit.getScheduler()
-                .runTaskTimerAsynchronously(super.main, super.task, this.delayed, this.period).getTaskId();
+                .runTaskTimerAsynchronously(super.main, super.taskRunnable, this.delayed, this.period);
     }
 }

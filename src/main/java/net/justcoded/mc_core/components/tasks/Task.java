@@ -3,12 +3,16 @@ package net.justcoded.mc_core.components.tasks;
 import net.justcoded.mc_core.components.interfaces.Taskable;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitTask;
 
-public abstract class Task<T extends JavaPlugin> implements Taskable {
+import java.util.function.Consumer;
+
+public abstract class Task<T extends JavaPlugin> implements Taskable<T> {
 
     protected final T main;
-    protected int id;
-    protected Runnable task;
+    private BukkitTask task;
+    protected Runnable taskRunnable;
+    protected Consumer<Task<T>> taskConsumer;
 
     public Task(T main) {
         this.main = main;
@@ -21,27 +25,35 @@ public abstract class Task<T extends JavaPlugin> implements Taskable {
 
     @Override
     public void stopTask() {
-        this.stop();
+        this.cancel();
     }
 
     protected void run() {
-        this.task();
+        task = this.task();
     }
-    protected void stop() {
-        Bukkit.getScheduler().cancelTask(this.id);
+    protected void cancel() {
+        if (task != null && !task.isCancelled()) {
+            task.cancel();
+        }
     }
 
     @Override
     public void setEndAndEndTask(int seconds, Runnable task) {
         Bukkit.getScheduler().runTaskLater(main, () -> {
-            this.stop();
+            this.cancel();
             task.run();
         }, 20L * seconds);
     }
 
     @Override
     public Task<T> createTask(Runnable task) {
-        this.task = task;
+        this.taskRunnable = task;
+        return this;
+    }
+
+    @Override
+    public Task<T> createTask(Consumer<Task<T>> task) {
+        this.taskConsumer = task;
         return this;
     }
 }

@@ -8,7 +8,9 @@ public final class Core extends JavaPlugin {
     @Override
     public void onEnable() {
         // Plugin startup logic
-        new AsyncTask<>(this).createTask(null).runTask();
+        new AsyncTask<>(this).createTask(() -> {}).runTask();
+
+        new AsyncTask<>(this).createTask((task) -> {}).runTask();
     }
 
     @Override
