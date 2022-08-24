@@ -77,4 +77,17 @@ public class CMap<K, V> implements Mappable<K, V> {
     public int size() {
         return this.map.size();
     }
+
+    @Override
+    public Map<K, V> getMap() {
+        return map;
+    }
+
+    @Override
+    public boolean set(K k, V v) {
+        if (add(k, v)) {
+            return true;
+        }
+        return update(k, v);
+    }
 }

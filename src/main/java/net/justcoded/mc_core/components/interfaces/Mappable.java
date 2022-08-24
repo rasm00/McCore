@@ -17,4 +17,6 @@ public interface Mappable<K, V> {
     boolean containsValue(V v);
     Set<K> getKeys();
     int size();
+    Map<K, V> getMap();
+    boolean set(K k, V v);
 }
