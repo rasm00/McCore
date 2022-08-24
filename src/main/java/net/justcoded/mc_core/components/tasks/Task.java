@@ -37,6 +37,15 @@ public abstract class Task<T extends JavaPlugin> implements Taskable<T> {
         }
     }
 
+    protected void runCurrentTask() {
+        if (taskRunnable != null) {
+            taskRunnable.run();
+        }
+        if (taskConsumer != null) {
+            taskConsumer.accept(this);
+        }
+    }
+
     @Override
     public void setEndAndEndTask(int seconds, Runnable task) {
         Bukkit.getScheduler().runTaskLater(main, () -> {

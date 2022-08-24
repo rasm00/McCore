@@ -1,7 +1,7 @@
 package net.justcoded.mc_core.components.tasks;
 
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
 public class SyncDelayedTask<T extends JavaPlugin> extends SyncTask<T>{
@@ -15,7 +15,11 @@ public class SyncDelayedTask<T extends JavaPlugin> extends SyncTask<T>{
 
     @Override
     public BukkitTask task() {
-        return Bukkit.getScheduler()
-                .runTaskLater(super.main, super.taskRunnable, this.delayed);
+        return new BukkitRunnable() {
+            @Override
+            public void run() {
+                runCurrentTask();
+            }
+        }.runTaskLater(super.main, this.delayed);
     }
 }
