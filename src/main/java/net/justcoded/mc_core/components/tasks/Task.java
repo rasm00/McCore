@@ -31,6 +31,7 @@ public abstract class Task<T extends JavaPlugin> implements Taskable<T> {
     protected void run() {
         task = this.task();
     }
+
     protected void cancel() {
         if (task != null && !task.isCancelled()) {
             task.cancel();
@@ -38,11 +39,11 @@ public abstract class Task<T extends JavaPlugin> implements Taskable<T> {
     }
 
     protected void runCurrentTask() {
-        if (taskRunnable != null) {
-            taskRunnable.run();
-        }
         if (taskConsumer != null) {
             taskConsumer.accept(this);
+        }
+        if (taskRunnable != null) {
+            taskRunnable.run();
         }
     }
 
@@ -65,4 +66,5 @@ public abstract class Task<T extends JavaPlugin> implements Taskable<T> {
         this.taskConsumer = task;
         return this;
     }
+
 }
