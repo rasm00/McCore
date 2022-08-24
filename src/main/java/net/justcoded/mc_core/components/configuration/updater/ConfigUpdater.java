@@ -35,8 +35,8 @@ public class ConfigUpdater {
         String value = writer.toString(); // config contents
 
         Path toUpdatePath = toUpdate.toPath();
-        if (!value.equals(new String(Files.readAllBytes(toUpdatePath), StandardCharsets.UTF_8))) { // if updated contents are not the same as current file contents, update
-            Files.write(toUpdatePath, value.getBytes(StandardCharsets.UTF_8));
+        if (!value.equals(Files.readString(toUpdatePath))) { // if updated contents are not the same as current file contents, update
+            Files.writeString(toUpdatePath, value);
         }
     }
 
@@ -127,7 +127,7 @@ public class ConfigUpdater {
 
                 //Remove the last key from keyBuilder if current path isn't a config section or if it is empty to prepare for the next key
                 if (!keyBuilder.isConfigSectionWithKeys()) {
-                    keyBuilder.removeLastKey();
+                    KeyBuilder.removeLastKey(keyBuilder.getBuilder(), SEPARATOR);
                 }
             }
         }
@@ -218,19 +218,6 @@ public class ConfigUpdater {
         if (comment != null)
             //Replaces all '\n' with '\n' + indents except for the last one
             writer.write(indents + comment.substring(0, comment.length() - 1).replace("\n", "\n" + indents) + "\n");
-    }
-
-    //Input: 'key1.key2' Result: 'key1'
-    private static void removeLastKey(StringBuilder keyBuilder) {
-        if (keyBuilder.length() == 0)
-            return;
-
-        String keyString = keyBuilder.toString();
-        //Must be enclosed in brackets in case a regex special character is the separator
-        String[] split = keyString.split("[" + SEPARATOR + "]");
-        //Makes sure begin index isn't < 0 (error). Occurs when there is only one key in the path
-        int minIndex = Math.max(0, keyBuilder.length() - split[split.length - 1].length() - 1);
-        keyBuilder.replace(minIndex, keyBuilder.length(), "");
     }
 
     private static void appendNewLine(StringBuilder builder) {

@@ -28,7 +28,7 @@ public class KeyBuilder implements Cloneable {
         //Checks keyBuilder path against config to see if the path is valid.
         //If the path doesn't exist in the config it keeps removing last key in keyBuilder.
         while (builder.length() > 0 && !config.contains(builder.toString() + separator + key)) {
-            removeLastKey();
+            removeLastKey(builder, separator);
         }
 
         //Add the separator if there is already a key inside keyBuilder
@@ -92,7 +92,7 @@ public class KeyBuilder implements Cloneable {
     }
 
     //Input: 'key1.key2' Result: 'key1'
-    public void removeLastKey() {
+    public static void removeLastKey(StringBuilder builder, char separator) {
         if (builder.length() == 0)
             return;
 
@@ -102,6 +102,10 @@ public class KeyBuilder implements Cloneable {
         //Makes sure begin index isn't < 0 (error). Occurs when there is only one key in the path
         int minIndex = Math.max(0, builder.length() - split[split.length - 1].length() - 1);
         builder.replace(minIndex, builder.length(), "");
+    }
+
+    public StringBuilder getBuilder() {
+        return builder;
     }
 
     @Override
