@@ -1,7 +1,6 @@
 package net.justcoded.mc_core.components.tasks;
 
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
 public class SyncTask<T extends JavaPlugin> extends Task<T>{
@@ -11,11 +10,7 @@ public class SyncTask<T extends JavaPlugin> extends Task<T>{
 
     @Override
     public BukkitTask task() {
-        return new BukkitRunnable() {
-            @Override
-            public void run() {
-                runCurrentTask();
-            }
-        }.runTask(super.main);
+        return new TaskRunnable(this::runCurrentTask)
+                .runTask(super.main);
     }
 }
