@@ -35,8 +35,7 @@ public class ConfigurationMap {
             return path;
         }
 
-        if (object instanceof String) {
-            String str = (String) object;
+        if (object instanceof String str) {
             map.set(path, str);
             return str;
         }

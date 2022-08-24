@@ -25,8 +25,8 @@ public class Configuration {
         this.plugin = plugin;
         this.pluginName = plugin.getName();
         this.pluginDataFolder = plugin.getDataFolder();
-        configuration = getFile();
-        config = YamlConfiguration.loadConfiguration(configuration);
+        this.configuration = getFile();
+        this.config = YamlConfiguration.loadConfiguration(configuration);
         createConfig();
     }
 
@@ -35,76 +35,76 @@ public class Configuration {
         this.plugin = plugin;
         this.pluginName = plugin.getName();
         this.pluginDataFolder = plugin.getDataFolder();
-        configuration = getFile();
+        this.configuration = getFile();
         if (!readOnly) {
-            config = YamlConfiguration.loadConfiguration(configuration);
+            this.config = YamlConfiguration.loadConfiguration(this.configuration);
         }
         createConfig();
     }
 
     public void createConfig() {
-        if (!configuration.exists()) {
-            if (!pluginDataFolder.exists()) {
+        if (!this.configuration.exists()) {
+            if (!this.pluginDataFolder.exists()) {
                 this.pluginDataFolder.mkdir();
             }
-            plugin.saveResource(fileName, false);
+            this.plugin.saveResource(this.fileName, false);
         }
     }
 
     public void updateConfig() {
         try {
-            ConfigUpdater.update(plugin, fileName, configuration);
+            ConfigUpdater.update(this.plugin, this.fileName, this.configuration);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     private void setName(String name) {
-        if (name == null) {
-            return;
+        if (name.isBlank()) {
+            throw new RuntimeException("Cannot create file with empty name.");
         }
 
         if (name.endsWith(".yml")) {
-            fileName = name;
+            this.fileName = name;
         } else {
-            fileName = name + ".yml";
+            this.fileName = name + ".yml";
         }
     }
 
     private File getFile() {
-        return new File(pluginDataFolder, fileName);
+        return new File(this.pluginDataFolder, this.fileName);
     }
 
     public FileConfiguration getConfig() {
-        return config;
+        return this.config;
     }
 
     public File getConfiguration() {
-        return configuration;
+        return this.configuration;
     }
 
     public String getFileName() {
-        return fileName;
+        return this.fileName;
     }
 
     public String getPluginName() {
-        return pluginName;
+        return this.pluginName;
     }
 
     public void save() {
         try {
-            config.save(configuration);
+            this.config.save(this.configuration);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public void reload() {
-        config = YamlConfiguration.loadConfiguration(configuration);
+        this.config = YamlConfiguration.loadConfiguration(this.configuration);
     }
 
     public Plugin getPlugin() {
-        return plugin;
+        return this.plugin;
     }
 
     public Object getObject(String path) {
@@ -112,11 +112,11 @@ public class Configuration {
     }
 
     public Optional<ConfigurationSection> getSection(String path) {
-        if (config == null) {
+        if (this.config == null) {
             return Optional.empty();
         }
 
-        return Optional.ofNullable(config.getConfigurationSection(path.endsWith(".") ? path.substring(0, path.length() - 1) : path));
+        return Optional.ofNullable(this.config.getConfigurationSection(path.endsWith(".") ? path.substring(0, path.length() - 1) : path));
     }
 
     public Optional<Set<String>> getSectionKeys(String path) {

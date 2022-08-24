@@ -29,21 +29,21 @@ public abstract class Task<T extends JavaPlugin> implements Taskable<T> {
     }
 
     protected void run() {
-        task = this.task();
+        this.task = this.task();
     }
 
     protected void cancel() {
-        if (task != null && !task.isCancelled()) {
-            task.cancel();
+        if (this.task != null && !this.task.isCancelled()) {
+            this.task.cancel();
         }
     }
 
     protected void runCurrentTask() {
-        if (taskConsumer != null) {
-            taskConsumer.accept(this);
+        if (this.taskConsumer != null) {
+            this.taskConsumer.accept(this);
         }
-        if (taskRunnable != null) {
-            taskRunnable.run();
+        if (this.taskRunnable != null) {
+            this.taskRunnable.run();
         }
     }
 
