@@ -12,7 +12,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Consumer;
 
-public class Configuration {
+class Configuration {
     private final Plugin plugin;
     private final String pluginName;
     private String fileName;
@@ -26,7 +26,7 @@ public class Configuration {
         this.pluginName = plugin.getName();
         this.pluginDataFolder = plugin.getDataFolder();
         this.configuration = getFile();
-        this.config = YamlConfiguration.loadConfiguration(configuration);
+        this.config = YamlConfiguration.loadConfiguration(this.configuration);
         createConfig();
     }
 
@@ -116,7 +116,9 @@ public class Configuration {
             return Optional.empty();
         }
 
-        return Optional.ofNullable(this.config.getConfigurationSection(path.endsWith(".") ? path.substring(0, path.length() - 1) : path));
+        return Optional.ofNullable(this.config.getConfigurationSection(path.endsWith(".")
+                ? path.substring(0, path.length() - 1)
+                : path));
     }
 
     public Optional<Set<String>> getSectionKeys(String path) {

@@ -2,11 +2,12 @@ package net.justcoded.mc_core.components.collections;
 
 import net.justcoded.mc_core.components.interfaces.Listable;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class CList<T> implements Listable<T> {
+public class CList<T> implements Listable<T>, Serializable {
 
     private final List<T> list = new ArrayList<>();
 

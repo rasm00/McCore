@@ -2,9 +2,10 @@ package net.justcoded.mc_core.components.collections;
 
 import net.justcoded.mc_core.components.interfaces.Settable;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class CSet<T> implements Settable<T> {
+public class CSet<T> implements Settable<T>, Serializable {
 
     private final Set<T> set = new HashSet<>();
 

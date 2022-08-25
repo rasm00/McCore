@@ -2,9 +2,10 @@ package net.justcoded.mc_core.components.collections;
 
 import net.justcoded.mc_core.components.interfaces.Queueable;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class CQueue<T> implements Queueable<T> {
+public class CQueue<T> implements Queueable<T>, Serializable {
 
     private final Queue<T> queue = new LinkedList<>();
 

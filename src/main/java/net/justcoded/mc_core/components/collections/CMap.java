@@ -2,12 +2,13 @@ package net.justcoded.mc_core.components.collections;
 
 import net.justcoded.mc_core.components.interfaces.Mappable;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
-public class CMap<K, V> implements Mappable<K, V> {
+public class CMap<K, V> implements Mappable<K, V>, Serializable {
 
     private final Map<K, V> map = new HashMap<>();
 

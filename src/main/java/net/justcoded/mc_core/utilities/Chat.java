@@ -1,4 +1,4 @@
-package net.justcoded.mc_core.utils;
+package net.justcoded.mc_core.utilities;
 
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
