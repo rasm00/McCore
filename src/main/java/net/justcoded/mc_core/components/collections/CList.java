@@ -1,6 +1,6 @@
 package net.justcoded.mc_core.components.collections;
 
-import net.justcoded.mc_core.components.interfaces.Listable;
+import net.justcoded.mc_core.interfaces.Listable;
 
 import java.io.Serializable;
 import java.util.ArrayList;

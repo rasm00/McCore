@@ -1,6 +1,6 @@
 package net.justcoded.mc_core.components;
 
-import net.justcoded.mc_core.components.interfaces.CommandExecutable;
+import net.justcoded.mc_core.interfaces.CommandExecutable;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.TabCompleter;
 

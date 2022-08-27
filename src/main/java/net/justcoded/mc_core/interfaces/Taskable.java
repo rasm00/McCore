@@ -1,4 +1,4 @@
-package net.justcoded.mc_core.components.interfaces;
+package net.justcoded.mc_core.interfaces;
 
 import net.justcoded.mc_core.components.tasks.Task;
 import org.bukkit.plugin.java.JavaPlugin;

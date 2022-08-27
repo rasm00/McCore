@@ -1,6 +1,6 @@
 package net.justcoded.mc_core.components.collections;
 
-import net.justcoded.mc_core.components.interfaces.Settable;
+import net.justcoded.mc_core.interfaces.Settable;
 
 import java.io.Serializable;
 import java.util.*;

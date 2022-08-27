@@ -6,8 +6,8 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 import java.lang.reflect.Field;
 
-import static net.justcoded.mc_core.utilities.InjectorUtils.getConfigFields;
-import static net.justcoded.mc_core.utilities.InjectorUtils.getItemFields;
+import static net.justcoded.mc_core.utilities.Injector.getConfigFields;
+import static net.justcoded.mc_core.utilities.Injector.getItemFields;
 
 
 public final class DataInjector {

@@ -1,4 +1,4 @@
-package net.justcoded.mc_core.components.interfaces;
+package net.justcoded.mc_core.interfaces;
 
 import java.util.Map;
 import java.util.Optional;

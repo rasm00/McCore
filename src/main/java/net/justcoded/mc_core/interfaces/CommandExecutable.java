@@ -1,4 +1,4 @@
-package net.justcoded.mc_core.components.interfaces;
+package net.justcoded.mc_core.interfaces;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;

@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class InjectorUtils {
+public class Injector {
 
     public static List<Field> getConfigFields(Object object) {
         return Arrays.stream(object.getClass().getDeclaredFields())
