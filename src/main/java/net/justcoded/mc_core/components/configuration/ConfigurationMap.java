@@ -4,21 +4,21 @@ import net.justcoded.mc_core.components.collections.CMap;
 import org.bukkit.plugin.Plugin;
 
 public class ConfigurationMap {
-    private final Configuration configuration;
+    private final YamlConfiguration yamlConfiguration;
     private final CMap<String, String> map;
 
     public ConfigurationMap(Plugin plugin, String file) {
         map = new CMap<>();
-        configuration = new Configuration(plugin, file);
+        yamlConfiguration = new YamlConfiguration(plugin, file);
     }
 
     public ConfigurationMap(Plugin plugin, String file, boolean readOnly) {
         map = new CMap<>();
-        configuration = new Configuration(plugin, file, readOnly);
+        yamlConfiguration = new YamlConfiguration(plugin, file, readOnly);
     }
 
-    public Configuration getConfiguration() {
-        return configuration;
+    public YamlConfiguration getConfiguration() {
+        return yamlConfiguration;
     }
 
     public CMap<String, String> getMap() {

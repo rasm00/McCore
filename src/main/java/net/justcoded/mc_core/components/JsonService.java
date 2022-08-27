@@ -34,7 +34,6 @@ public final class JsonService<S> {
             return true;
         } catch (IOException e) {
             e.printStackTrace();
-            ExceptionPrinter.logException(e.getMessage());
             return false;
         }
     }
@@ -47,7 +46,6 @@ public final class JsonService<S> {
             return true;
         } catch (IOException e) {
             e.printStackTrace();
-            ExceptionPrinter.logException(e.getMessage());
             return false;
         }
     }

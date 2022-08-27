@@ -3,7 +3,6 @@ package net.justcoded.mc_core.components.configuration;
 import net.justcoded.mc_core.components.configuration.updater.ConfigUpdater;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 
 import java.io.File;
@@ -12,7 +11,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Consumer;
 
-class Configuration {
+class YamlConfiguration {
     private final Plugin plugin;
     private final String pluginName;
     private String fileName;
@@ -20,24 +19,24 @@ class Configuration {
     private final File configuration;
     private FileConfiguration config;
 
-    public Configuration(Plugin plugin, String fileName) {
+    public YamlConfiguration(Plugin plugin, String fileName) {
         setName(fileName);
         this.plugin = plugin;
         this.pluginName = plugin.getName();
         this.pluginDataFolder = plugin.getDataFolder();
         this.configuration = getFile();
-        this.config = YamlConfiguration.loadConfiguration(this.configuration);
+        this.config = org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(this.configuration);
         createConfig();
     }
 
-    public Configuration(Plugin plugin, String fileName, boolean readOnly) {
+    public YamlConfiguration(Plugin plugin, String fileName, boolean readOnly) {
         setName(fileName);
         this.plugin = plugin;
         this.pluginName = plugin.getName();
         this.pluginDataFolder = plugin.getDataFolder();
         this.configuration = getFile();
         if (!readOnly) {
-            this.config = YamlConfiguration.loadConfiguration(this.configuration);
+            this.config = org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(this.configuration);
         }
         createConfig();
     }
@@ -100,7 +99,7 @@ class Configuration {
     }
 
     public void reload() {
-        this.config = YamlConfiguration.loadConfiguration(this.configuration);
+        this.config = org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(this.configuration);
     }
 
     public Plugin getPlugin() {

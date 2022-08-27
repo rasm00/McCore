@@ -1,10 +1,10 @@
 package net.justcoded.mc_core.components;
 
-import net.justcoded.mc_library.components.annotations.ConfigItem;
-import net.justcoded.mc_library.injectors.DataInjector;
-import net.justcoded.mc_library.utils.ChatUtils;
-import net.justcoded.mc_library.utils.ItemStackFromConfigBuilder;
-import net.justcoded.mc_library.utils.ItemStackUtils;
+import net.justcoded.mc_core.annotations.ConfigItem;
+import net.justcoded.mc_core.injectors.DataInjector;
+import net.justcoded.mc_core.utilities.Chat;
+import net.justcoded.mc_core.utilities.ItemStackFromConfigBuilder;
+import net.justcoded.mc_core.utilities.ItemStackUtils;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
@@ -86,13 +86,13 @@ public class HItemData implements Serializable {
     public String getName() {
         if (name == null) return "default";
 
-        return ChatUtils.format(name);
+        return Chat.format(name);
     }
 
     public List<String> getLore() {
         if (lore == null) return new ArrayList<>();
 
-        return ChatUtils.format(lore);
+        return Chat.format(lore);
     }
 
     public Map<String, Integer> getEnchantments() {

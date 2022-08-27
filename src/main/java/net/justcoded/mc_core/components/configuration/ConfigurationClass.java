@@ -8,19 +8,19 @@ import java.io.Serializable;
 public abstract class ConfigurationClass implements Serializable {
 
     private final Plugin main;
-    private final Configuration configuration;
+    private final YamlConfiguration yamlConfiguration;
     protected FileConfiguration config;
 
     public ConfigurationClass(String name, Plugin main) {
         this.main = main;
-        configuration = new Configuration(main, name);
+        yamlConfiguration = new YamlConfiguration(main, name);
         reload();
     }
 
     public void reload() {
-        configuration.createConfig();
-        configuration.reload();
-        config = configuration.getConfig();
+        yamlConfiguration.createConfig();
+        yamlConfiguration.reload();
+        config = yamlConfiguration.getConfig();
     }
 
     public abstract ConfigurationClass injectData();

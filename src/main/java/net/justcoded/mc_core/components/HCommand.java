@@ -24,7 +24,7 @@ public abstract class HCommand<T extends JavaPlugin> implements CommandExecutor,
             command.setTabCompleter(this);
 
         }catch (NullPointerException ex) {
-            ExceptionPrinter.logException(ex.getMessage());
+           ex.printStackTrace();
         }
     }
 
