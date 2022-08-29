@@ -2,32 +2,22 @@ package net.justcoded.mc_core.components.collections;
 
 import net.justcoded.mc_core.interfaces.Mappable;
 
-import java.io.Serializable;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
-public class CMap<K, V> implements Mappable<K, V>, Serializable {
-
-    private final Map<K, V> map = new HashMap<>();
+public class CLinkedMap<K, V> implements Mappable<K, V> {
+    protected LinkedHashMap<K, V> map = new LinkedHashMap<>();
 
     @Override
-    public boolean add(K k, V v) {
-        if (! this.map.containsKey(k)) {
-            this.map.put(k, v);
-            return true;
-        }
-        return false;
+    public boolean add(K t, V v) {
+        return map.put(t, v) != null;
     }
 
     @Override
-    public boolean remove(K k) {
-        if (! this.map.containsKey(k)) {
-            return false;
-        }
-        this.map.remove(k);
-        return true;
+    public boolean remove(K t) {
+        return map.remove(t) != null;
     }
 
     @Override
@@ -41,47 +31,50 @@ public class CMap<K, V> implements Mappable<K, V>, Serializable {
 
     @Override
     public Optional<V> get(K k) {
-        return Optional.ofNullable(this.map.get(k));
+        if (k == null || this.size() == 0) {
+            return Optional.empty();
+        }
+        return Optional.ofNullable(map.get(k));
     }
 
     @Override
     public Map<K, V> clone() {
-        return new HashMap<>(this.map);
+        return new LinkedHashMap<>(map);
     }
 
     @Override
     public Map<K, V> get() {
-        return this.map ;
+        return map;
     }
 
     @Override
     public void clear() {
-        this.map.clear();
+        map.clear();
     }
 
     @Override
     public boolean containsKey(K k) {
-        return false;
+        return map.containsKey(k);
     }
 
     @Override
     public boolean containsValue(V v) {
-        return false;
+        return map.containsValue(v);
     }
 
     @Override
     public Set<K> getKeys() {
-        return null;
+        return map.keySet();
     }
 
     @Override
     public int size() {
-        return this.map.size();
+        return map.size();
     }
 
     @Override
     public Map<K, V> getMap() {
-        return map;
+        return null;
     }
 
     @Override
@@ -91,10 +84,7 @@ public class CMap<K, V> implements Mappable<K, V>, Serializable {
 
     @Override
     public boolean set(K k, V v) {
-        if (add(k, v)) {
-            return true;
-        }
-        return update(k, v);
+        return false;
     }
 
     @Override

@@ -6,8 +6,8 @@ import java.util.Set;
 
 public interface Mappable<K, V> {
 
-    boolean add(K t, V v);
-    boolean remove(K t);
+    boolean add(K k, V v);
+    boolean remove(K k);
     boolean update(K k, V v);
     Optional<V> get(K k);
     Map<K,V> clone();
@@ -18,5 +18,7 @@ public interface Mappable<K, V> {
     Set<K> getKeys();
     int size();
     Map<K, V> getMap();
+    boolean remove(K k, V v);
     boolean set(K k, V v);
+    V getOrDefault(K k, V defaultV);
 }
