@@ -2,12 +2,12 @@ package net.justcoded.mc_core.components.commands.arguments;
 
 import net.justcoded.mc_core.components.collections.CLinkedMap;
 
-public record OpCommandArgument(
-        CLinkedMap<String, OpCommandArg> args,
+public record CCommandArgument(
+        CLinkedMap<String, CCommandArg> args,
         String[] strings,
         int startPosition) {
 
-    public OpCommandArg getArg(String name) {
+    public CCommandArg getArg(String name) {
         return args.getOrDefault(name, null);
     }
 

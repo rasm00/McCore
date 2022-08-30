@@ -3,7 +3,7 @@ package net.justcoded.mc_core.components.commands.arguments;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 
-public class EnchantArg extends OpCommandArg {
+public class EnchantArg extends CCommandArg {
 
     public EnchantArg(String name) {
         super(name);

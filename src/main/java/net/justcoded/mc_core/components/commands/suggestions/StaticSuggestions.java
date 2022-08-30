@@ -9,14 +9,14 @@ public class StaticSuggestions {
         map.set(type, suggestion);
     }
 
-    public static OpSimpleSuggestion get(SUGGESTION_TYPE type) {
+    public static CSimpleSuggestion get(SUGGESTION_TYPE type) {
         if (map.getKeys().size() == 0) {
             load();
         }
         if (map.containsKey(type)) {
-            return new OpSimpleSuggestion(map.getMap().get(type).getSuggestion());
+            return new CSimpleSuggestion(map.getMap().get(type).getSuggestion());
         }
-        return new OpSimpleSuggestion("");
+        return new CSimpleSuggestion("");
     }
 
     public static void load() {

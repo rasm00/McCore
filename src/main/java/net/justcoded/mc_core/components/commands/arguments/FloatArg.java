@@ -2,7 +2,7 @@ package net.justcoded.mc_core.components.commands.arguments;
 
 import net.justcoded.mc_core.utilities.CString;
 
-public class FloatArg extends OpCommandArg {
+public class FloatArg extends CCommandArg {
     public FloatArg(String name) {
         super(name);
     }

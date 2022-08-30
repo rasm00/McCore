@@ -3,7 +3,7 @@ package net.justcoded.mc_core.components.commands.arguments;
 import net.justcoded.mc_core.utilities.CString;
 import org.bukkit.Material;
 
-public class MaterialArg extends OpCommandArg {
+public class MaterialArg extends CCommandArg {
 
     public MaterialArg(String name) {
         super(name);

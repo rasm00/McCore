@@ -2,7 +2,7 @@ package net.justcoded.mc_core.components.commands.arguments;
 
 import net.justcoded.mc_core.utilities.CString;
 
-public class IntArg extends OpCommandArg {
+public class IntArg extends CCommandArg {
     public IntArg(String name) {
         super(name);
     }

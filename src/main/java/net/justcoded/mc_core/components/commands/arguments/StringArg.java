@@ -1,6 +1,6 @@
 package net.justcoded.mc_core.components.commands.arguments;
 
-public class StringArg extends OpCommandArg {
+public class StringArg extends CCommandArg {
 
     public StringArg(String name) {
         super(name);

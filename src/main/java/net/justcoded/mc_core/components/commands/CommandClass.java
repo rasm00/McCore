@@ -1,17 +1,17 @@
-package net.justcoded.mc_core.components;
+package net.justcoded.mc_core.components.commands;
 
 import org.bukkit.command.*;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.List;
 
-public abstract class HCommand<T extends JavaPlugin> implements CommandExecutor, TabCompleter {
+public abstract class CommandClass<T extends JavaPlugin> implements CommandExecutor, TabCompleter {
 
     protected String command;
     protected String permission;
     protected T plugin;
 
-    public HCommand(String command, String permission, T plugin) {
+    public CommandClass(String command, String permission, T plugin) {
         this.command = command;
         this.permission = permission;
         this.plugin = plugin;

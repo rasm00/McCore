@@ -1,10 +1,10 @@
 package net.justcoded.mc_core.components.commands;
 
 import net.justcoded.mc_core.components.collections.CLinkedMap;
-import net.justcoded.mc_core.components.commands.arguments.OpCommandArg;
-import net.justcoded.mc_core.components.commands.arguments.OpCommandArgument;
-import net.justcoded.mc_core.components.commands.suggestions.OpCommandSuggestion;
-import net.justcoded.mc_core.components.commands.suggestions.OpSimpleSuggestion;
+import net.justcoded.mc_core.components.commands.arguments.CCommandArg;
+import net.justcoded.mc_core.components.commands.arguments.CCommandArgument;
+import net.justcoded.mc_core.components.commands.suggestions.CCommandSuggestion;
+import net.justcoded.mc_core.components.commands.suggestions.CSimpleSuggestion;
 import net.justcoded.mc_core.components.commands.suggestions.StaticSuggestions;
 import net.justcoded.mc_core.utilities.CString;
 import org.bukkit.Bukkit;
@@ -28,10 +28,10 @@ public class CCommand extends BukkitCommand {
     private List<Integer> argsNumber = new ArrayList<>(List.of(-1));
     private final String name;
     private final List<CCommand> list = new ArrayList<>();
-    private final CLinkedMap<String, OpCommandArg> args = new CLinkedMap<>();
-    private BiConsumer<CCommandSender, OpCommandArgument> biConsumer;
-    private final List<OpCommandSuggestion> suggestions = new ArrayList<>();
-    private final List<OpSimpleSuggestion> simpleSuggestions = new ArrayList<>();
+    private final CLinkedMap<String, CCommandArg> args = new CLinkedMap<>();
+    private BiConsumer<CCommandSender, CCommandArgument> biConsumer;
+    private final List<CCommandSuggestion> suggestions = new ArrayList<>();
+    private final List<CSimpleSuggestion> simpleSuggestions = new ArrayList<>();
     private boolean hasToBePlayer, removeDefaultCommandSuggestion;
     private CCommandPermission seeTabComplete = new CCommandPermission(null, null, CCommandPermission.PERMISSION_TYPE.SEE_TAB_COMPLETE), useCommand = new CCommandPermission(null, null, CCommandPermission.PERMISSION_TYPE.USE_COMMAND);
 
@@ -50,32 +50,32 @@ public class CCommand extends BukkitCommand {
         return this;
     }
 
-    public CCommand addArgSuggestion(OpCommandArg arg, OpSimpleSuggestion suggestion) {
+    public CCommand addArgSuggestion(CCommandArg arg, CSimpleSuggestion suggestion) {
         return addArg(arg).addSuggestion(suggestion);
     }
 
-    public CCommand addArgSuggestion(OpCommandArg arg, OpCommandSuggestion suggestion) {
+    public CCommand addArgSuggestion(CCommandArg arg, CCommandSuggestion suggestion) {
         return addArg(arg).addSuggestion(suggestion);
     }
 
-    public CCommand addArgSuggestion(OpCommandArg arg, StaticSuggestions.SUGGESTION_TYPE suggestion) {
+    public CCommand addArgSuggestion(CCommandArg arg, StaticSuggestions.SUGGESTION_TYPE suggestion) {
         return addArg(arg).addSuggestion(suggestion);
     }
 
-    public CCommand addArgSuggestion(OpCommandArg arg, String suggestion) {
+    public CCommand addArgSuggestion(CCommandArg arg, String suggestion) {
         return addArg(arg).addSuggestion(suggestion);
     }
 
-    public CCommand addArgSuggestion(OpCommandArg arg, List<String> suggestion) {
+    public CCommand addArgSuggestion(CCommandArg arg, List<String> suggestion) {
         return addArg(arg).addSuggestion(suggestion);
     }
 
-    public CCommand addSuggestion(OpCommandSuggestion suggestion) {
+    public CCommand addSuggestion(CCommandSuggestion suggestion) {
         suggestions.add(suggestion);
         return addArgNumber();
     }
 
-    public CCommand addSuggestion(OpSimpleSuggestion suggestion) {
+    public CCommand addSuggestion(CSimpleSuggestion suggestion) {
         simpleSuggestions.add(suggestion);
         return addArgNumber();
     }
@@ -85,18 +85,18 @@ public class CCommand extends BukkitCommand {
     }
 
     public CCommand addSuggestion(String suggestion) {
-        return addSuggestion(new OpSimpleSuggestion(suggestion));
+        return addSuggestion(new CSimpleSuggestion(suggestion));
     }
 
     public CCommand addSuggestion(List<String> suggestions) {
-        return addSuggestion(new OpSimpleSuggestion(suggestions));
+        return addSuggestion(new CSimpleSuggestion(suggestions));
     }
 
     public List<CCommand> getCommands() {
         return list;
     }
 
-    public CCommand addArg(OpCommandArg arg) {
+    public CCommand addArg(CCommandArg arg) {
         args.set(arg.getName(), arg);
         return this;
     }
@@ -126,7 +126,7 @@ public class CCommand extends BukkitCommand {
 
     public void executeFunction(CommandSender sender, String[] args) {
         try {
-            biConsumer.accept(new CCommandSender(sender), new OpCommandArgument(this.args, args, isMain ? -1 : 0));
+            biConsumer.accept(new CCommandSender(sender), new CCommandArgument(this.args, args, isMain ? -1 : 0));
         } catch (NullPointerException ignore) {}
     }
 
@@ -227,21 +227,21 @@ public class CCommand extends BukkitCommand {
         return this;
     }
 
-    public BiConsumer<CCommandSender, OpCommandArgument> getConsumer() {
+    public BiConsumer<CCommandSender, CCommandArgument> getConsumer() {
         return biConsumer;
     }
 
-    public CCommand execute(BiConsumer<CCommandSender, OpCommandArgument> biConsumer) {
+    public CCommand execute(BiConsumer<CCommandSender, CCommandArgument> biConsumer) {
         this.biConsumer = biConsumer;
         return this;
     }
 
-    public CCommand executeAsPlayer(BiConsumer<CCommandSender, OpCommandArgument> biConsumer) {
+    public CCommand executeAsPlayer(BiConsumer<CCommandSender, CCommandArgument> biConsumer) {
         setHasToBePlayer(true);
         return execute(biConsumer);
     }
 
-    public CCommand executeAsPlayerWithArgLength(BiConsumer<CCommandSender, OpCommandArgument> biConsumer, int argLength) {
+    public CCommand executeAsPlayerWithArgLength(BiConsumer<CCommandSender, CCommandArgument> biConsumer, int argLength) {
         setHasToBePlayer(true);
         return executeWithArgLength(biConsumer, argLength);
     }
@@ -251,7 +251,7 @@ public class CCommand extends BukkitCommand {
         return this;
     }
 
-    public CCommand executeWithArgLength(BiConsumer<CCommandSender, OpCommandArgument> biConsumer, int argLength) {
+    public CCommand executeWithArgLength(BiConsumer<CCommandSender, CCommandArgument> biConsumer, int argLength) {
         this.biConsumer = ((sender, args) -> {
             if (args.getLength() == argLength) {
                 biConsumer.accept(sender, args);

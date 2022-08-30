@@ -5,7 +5,7 @@ import org.bukkit.Sound;
 
 import java.util.Optional;
 
-public class SoundArg extends OpCommandArg {
+public class SoundArg extends CCommandArg {
     public SoundArg(String name) {
         super(name);
     }
